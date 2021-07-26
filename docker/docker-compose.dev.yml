@@ -1,0 +1,6 @@
+services:
+  eden_db:
+    environment:
+      MARIADB_ROOT_PASSWORD: ""
+      MARIADB_ALLOW_EMPTY_ROOT_PASSWORD: "true"
+      MARIADB_DATABASE: "test"

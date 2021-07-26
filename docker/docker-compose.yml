@@ -1,0 +1,10 @@
+services:
+  eden_db:
+    build: ../src/db
+    environment:
+      MARIADB_ROOT_PASSWORD: "${EDEN_DB_PASSWORD}"
+      MARIADB_DATABASE: "eden"
+    volumes:
+      - ../src/db/data:/var/lib/mysql
+    labels:
+      container_name: eden_db
