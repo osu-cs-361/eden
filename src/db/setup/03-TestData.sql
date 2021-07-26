@@ -9,8 +9,35 @@ VALUES
         (SELECT id FROM User WHERE email="test1@test.email"),
         NULL,
         "Bromeliad",
-        "Beautiful Pink Guy",
+        "Beautiful Pink Central Flower",
         "Turn every few days to prevent leaning",
+        6,
+        CURRENT_DATE
+    ),
+    (
+        (SELECT id FROM User WHERE email="test1@test.email"),
+        NULL,
+        "White Bird of Paradise",
+        "Banana-like Medium Height Bush",
+        "Requires direct sunlight",
+        4,
+        CURRENT_DATE
+    ),
+    (
+        (SELECT id FROM User WHERE email="test2@test.email"),
+        NULL,
+        "Philodendron Brasil",
+        "Hanging Potted Plant",
+        "Fertilize when leaves turn excessively yellow",
+        7,
+        CURRENT_DATE
+    ),
+    (
+        (SELECT id FROM User WHERE email="test2@test.email"),
+        NULL,
+        "Zanzibar Gem",
+        "Vertically Growing Leafy Plant",
+        "Trim horizontal offshoots to prevent bushiness",
         7,
         CURRENT_DATE
     );
