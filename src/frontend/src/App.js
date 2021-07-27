@@ -8,9 +8,7 @@ function App() {
   return (
     <>
       <Switch>
-        <Route path="/" exact>
-          <Splash />
-        </Route>
+        <Route path="/" exact component={Splash} />
         <Route path="/signup" component={Signup} />
         <Route path="/login" component={Login} />
       </Switch>
