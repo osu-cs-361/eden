@@ -1,14 +1,15 @@
 import React from "react";
 import Navbar from "../components/Navbar";
-import PlantContainer from "../components/PlantContainer";
+import AppContainer from "../components/AppContainer";
+import NoPlants from "../components/NoPlants";
 
 export default function Home() {
   return (
-    <div class="h-screen">
-      <Navbar />
-      <div class="h-full w-full flex justify-center items-center bg-gray-100">
-        <PlantContainer />
-      </div>
-    </div>
+    <>
+      <Navbar navLinks={[{ ref: "/app/add-plant", text: "Add Plant" }]} />
+      <AppContainer>
+        <NoPlants />
+      </AppContainer>
+    </>
   );
 }
