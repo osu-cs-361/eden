@@ -43,7 +43,7 @@ export default function PlantForm({ type, plant }) {
       }
     } else if (type === "edit") {
       const response = await fetch(
-        process.env.REACT_APP_BACKEND_URL + "/edit-plant",
+        process.env.REACT_APP_BACKEND_URL + "/edit-plant/" + plant.id,
         {
           method: "PUT",
           body: JSON.stringify(body),

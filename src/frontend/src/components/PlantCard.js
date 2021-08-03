@@ -65,6 +65,7 @@ export default function PlantCard({ plant, deleteCallback }) {
         </div>
 
         <div className="flex justify-between">
+          {/* Water Plant */}
           <button className="flex group gap-x-0.5">
             <svg
               className="inline-block w-5 h-5 text-blue-500 fill-current group-hover:text-blue-600"
@@ -94,8 +95,13 @@ export default function PlantCard({ plant, deleteCallback }) {
               d
             </p>
           </button>
+
+          {/* Edit Plant */}
           <div className="flex gap-x-1">
-            <button className="inline-block w-5 h-5 text-gray-500 fill-current hover:text-gray-700">
+            <Link
+              to={"/app/edit-plant/" + plant.id}
+              className="inline-block w-5 h-5 text-gray-500 fill-current hover:text-gray-700"
+            >
               <svg
                 viewBox="0 0 469.336 469.336"
                 xmlns="http://www.w3.org/2000/svg"
@@ -112,7 +118,9 @@ export default function PlantCard({ plant, deleteCallback }) {
 			c8.063-8.063,22.104-8.063,30.167,0l64,64c4.031,4.031,6.25,9.385,6.25,15.083S445.784,117.72,441.784,121.72z"
                 />
               </svg>
-            </button>
+            </Link>
+
+            {/* Delete Plant */}
             <button
               className="inline-block w-5 h-5 text-red-400 fill-current hover:text-red-700"
               onClick={() => {

@@ -28,6 +28,14 @@ app.get("/plants", async (req, res) => {
   res.status(200).send(await db.select("Plant"));
 });
 
+app.get("/plant/:id", async (req, res) => {
+  const [plant] = await db.select("plant", {
+    filters: ["id=?"],
+    filterParams: [req.params.id],
+  });
+  res.status(200).send(plant);
+});
+
 app.post("/new-plant", async (req, res) => {
   const response = await db.insert("Plant", {
     ...req.body,

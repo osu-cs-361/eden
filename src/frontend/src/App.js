@@ -4,6 +4,7 @@ import Signup from "./screens/Signup";
 import Login from "./screens/Login";
 import Home from "./screens/Home";
 import AddPlant from "./screens/AddPlant";
+import EditPlant from "./screens/EditPlant";
 import { Route, Switch } from "react-router-dom";
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
         <Route path="/login" component={Login} />
         <Route path="/app" exact component={Home} />
         <Route path="/app/add-plant" component={AddPlant} />
+        <Route path="/app/edit-plant/:id" component={EditPlant} />
       </Switch>
     </>
   );
