@@ -17,18 +17,18 @@ export default function Login() {
   };
 
   return (
-    <div class="bg-gray-50 h-screen flex justify-center items-center text-center">
-      <div class="md:px-16 py-24 mx-auto bg-green-900 bg-opacity-25 rounded-sm w-5/6 max-w-screen-lg">
-        <h1 class="text-4xl">
-          Log in to <span class="text-green-900">Eden</span>
+    <div className="flex items-center justify-center h-screen text-center bg-gray-50">
+      <div className="w-5/6 max-w-screen-lg py-24 mx-auto bg-green-900 bg-opacity-25 rounded-sm md:px-16">
+        <h1 className="text-4xl">
+          Log in to <span className="text-green-900">Eden</span>
         </h1>
         <form
           id="login"
           onSubmit={(e) => submitLogin(e)}
-          class="mt-10 px-16 space-y-8"
+          className="px-16 mt-10 space-y-8"
         >
-          <div class="flex flex-col">
-            <label for="email" class="self-start text-xl">
+          <div className="flex flex-col">
+            <label for="email" className="self-start text-xl">
               Email:
             </label>
             <input
@@ -36,11 +36,11 @@ export default function Login() {
               id="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              class="mt-1 pl-2 h-10 self-stretch bg-gray-50"
+              className="self-stretch h-10 pl-2 mt-1 bg-gray-50"
             />
           </div>
-          <div class="flex flex-col">
-            <label for="password" class="self-start text-xl">
+          <div className="flex flex-col">
+            <label for="password" className="self-start text-xl">
               Password:
             </label>
             <input
@@ -48,19 +48,19 @@ export default function Login() {
               id="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              class="mt-1 pl-2 h-10 self-stretch bg-gray-50"
+              className="self-stretch h-10 pl-2 mt-1 bg-gray-50"
             />
           </div>
-          <div class="flex justify-around pt-8">
+          <div className="flex justify-around pt-8">
             <input
               type="submit"
               id="submit"
               value="Log In"
-              class="px-5 py-3 text-xl bg-gray-50 rounded-sm cursor-pointer hover:bg-green-900 hover:text-gray-50 hover:shadow-md"
+              className="px-5 py-3 text-xl rounded-sm cursor-pointer bg-gray-50 hover:bg-green-900 hover:text-gray-50 hover:shadow-md"
             />
             <Link
               to="/signup"
-              class="px-5 py-3 text-xl bg-gray-50 rounded-sm hover:bg-green-900 hover:text-gray-50 hover:shadow-md"
+              className="px-5 py-3 text-xl rounded-sm bg-gray-50 hover:bg-green-900 hover:text-gray-50 hover:shadow-md"
             >
               Sign up
             </Link>

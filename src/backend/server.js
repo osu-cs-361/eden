@@ -14,6 +14,7 @@ const db = new dbUtil({
 const noCors = (req, res, next) => {
   res.append("Access-Control-Allow-Origin", "*");
   res.append("Access-Control-Allow-Headers", "*");
+  res.append("Access-Control-Allow-Methods", "*");
   next();
 };
 app.use(noCors);
@@ -37,8 +38,21 @@ app.post("/new-plant", async (req, res) => {
   });
   if (response.insertId) {
     res.sendStatus(200);
+  } else {
+    res.sendStatus(500);
   }
-  res.sendStatus(500);
+});
+
+app.delete("/delete-plant/:id", async (req, res) => {
+  const result = await db.delete("Plant", {
+    filters: ["id=?"],
+    filterParams: [req.params.id],
+  });
+  if (result.affectedRows > 0) {
+    res.sendStatus(200);
+  } else {
+    res.sendStatus(404);
+  }
 });
 
 app.listen(app.get("port"), () => {

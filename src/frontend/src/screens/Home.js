@@ -4,9 +4,16 @@ import AppContainer from "../components/AppContainer";
 import NoPlants from "../components/NoPlants";
 import PlantCard from "../components/PlantCard";
 import CardContainer from "../components/CardContainer";
+import deletePlant from "../utilities/deletePlant";
 
 export default function Home() {
   const [plants, setPlants] = useState([]);
+
+  const deleteCallback = async (id) => {
+    if (await deletePlant(id)) {
+      setPlants(plants.filter((plant) => plant.id !== id));
+    }
+  };
 
   useEffect(() => {
     const fetchPlants = async (setPlants) => {
@@ -17,7 +24,6 @@ export default function Home() {
         if (response.ok) {
           const body = await response.json();
           // const body = await response.text();
-          console.log(body);
           setPlants(body);
         } else {
           throw new Error("HTTP error ", response.status);
@@ -36,7 +42,13 @@ export default function Home() {
         {plants.length ? (
           <CardContainer>
             {plants.map((plant) => {
-              return <PlantCard plant={plant} />;
+              return (
+                <PlantCard
+                  plant={plant}
+                  deleteCallback={deleteCallback}
+                  key={plant.id}
+                />
+              );
             })}
           </CardContainer>
         ) : (

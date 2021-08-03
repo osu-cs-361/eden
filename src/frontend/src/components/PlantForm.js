@@ -1,6 +1,7 @@
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 
-export default function PlantForm({ type, plant, history }) {
+export default function PlantForm({ type, plant }) {
   const [id, setId] = useState(plant?.id ?? -1);
   const [species, setSpecies] = useState(plant?.species ?? "");
   const [subtitle, setSubtitle] = useState(plant?.subtitle ?? "");
@@ -12,7 +13,9 @@ export default function PlantForm({ type, plant, history }) {
     plant?.last_watered ?? Date.now()
   );
 
-  const submitPlantForm = (e) => {
+  const history = useHistory();
+
+  const submitPlantForm = async (e) => {
     e.preventDefault();
     if (!species) return;
     const body = {
@@ -25,18 +28,21 @@ export default function PlantForm({ type, plant, history }) {
     if (id !== -1) body.id = id;
 
     if (type === "new") {
-      const response = fetch(process.env.REACT_APP_BACKEND_URL + "/new-plant", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(body),
-      });
+      const response = await fetch(
+        process.env.REACT_APP_BACKEND_URL + "/new-plant",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(body),
+        }
+      );
       if (response.ok) {
         history.push("/app");
       }
     } else if (type === "edit") {
-      const response = fetch(
+      const response = await fetch(
         process.env.REACT_APP_BACKEND_URL + "/edit-plant",
         {
           method: "PUT",
@@ -51,11 +57,13 @@ export default function PlantForm({ type, plant, history }) {
 
   return (
     <form
-      class="w-4/6 flex flex-col gap-y-2"
+      className="flex flex-col w-4/6 gap-y-2"
       onSubmit={(e) => submitPlantForm(e)}
     >
-      <h1 class="text-xl">{type === "new" ? "Add New Plant" : "Edit Plant"}</h1>
-      <input type="number" id="id" value={id} class="hidden" readOnly />
+      <h1 className="text-xl">
+        {type === "new" ? "Add New Plant" : "Edit Plant"}
+      </h1>
+      <input type="number" id="id" value={id} className="hidden" readOnly />
       <label htmlFor="species">Species</label>
       <input
         type="text"
@@ -87,13 +95,13 @@ export default function PlantForm({ type, plant, history }) {
         type="date"
         id="last-watered"
         value={lastWatered}
-        class="hidden"
+        className="hidden"
         readOnly
       />
       <input
         type="submit"
         value={type === "new" ? "Add Plant" : "Edit Plant"}
-        class="mt-2 self-center w-1/2"
+        className="self-center w-1/2 mt-2"
       />
     </form>
   );

@@ -2,8 +2,8 @@ import React from "react";
 
 export default function AppContainer({ children }) {
   return (
-    <div class="h-11/12 w-full flex justify-center items-center bg-gray-100">
-      <div class="w-5/6 h-5/6 flex flex-wrap bg-gray-300 gap-y-4 justify-center items-center">
+    <div className="flex items-center justify-center w-full bg-gray-100 h-11/12">
+      <div className="flex flex-wrap items-center justify-center w-5/6 bg-gray-300 h-5/6 gap-y-4">
         {children}
       </div>
     </div>

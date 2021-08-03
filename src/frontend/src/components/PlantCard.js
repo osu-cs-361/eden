@@ -1,19 +1,19 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 
-export default function PlantCard({ plant }) {
+export default function PlantCard({ plant, deleteCallback }) {
   const getDayDifference = (date) => {
     let delta = new Date(Date.now()) - date;
     return Math.floor(delta / (1000 * 60 * 60 * 24));
   };
 
   return (
-    <div class="relative bg-gray-50 rounded shadow-lg w-48">
-      <div class="opacity-70 absolute p-1 gap-x-1 flex items-center justify-around text-xs top-2 right-2 bg-gray-400 text-center rounded-full">
+    <div className="relative w-48 rounded shadow-lg bg-gray-50">
+      <div className="absolute flex items-center justify-around p-1 text-xs text-center bg-gray-400 rounded-full opacity-70 gap-x-1 top-2 right-2">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 512 512"
-          class="w-3 h-3"
+          className="w-3 h-3"
         >
           <path
             d="M458.406,380.681c-8.863-6.593-21.391-4.752-27.984,4.109c-3.626,4.874-7.506,9.655-11.533,14.21
@@ -51,23 +51,23 @@ export default function PlantCard({ plant }) {
         <img
           src="https://source.unsplash.com/random/200x150"
           alt=""
-          class="rounded-t w-48 h-36"
+          className="w-48 rounded-t h-36"
         />
       </Link>
-      <div class="px-1 pb-0.5">
-        <div class="pl-0.5">
-          <h1 class="block text-lg truncate">
+      <div className="px-1 pb-0.5">
+        <div className="pl-0.5">
+          <h1 className="block text-lg truncate">
             <Link to="/app/plant-info/:id">{plant.species}</Link>
           </h1>
-          <h2 class="block text-sm font-light italic truncate">
+          <h2 className="block text-sm italic font-light truncate">
             <Link to="/app/plant-info/:id">{plant.subtitle}</Link>
           </h2>
         </div>
 
-        <div class="flex justify-between">
-          <button class="flex group gap-x-0.5">
+        <div className="flex justify-between">
+          <button className="flex group gap-x-0.5">
             <svg
-              class="inline-block w-5 h-5 text-blue-500 fill-current group-hover:text-blue-600"
+              className="inline-block w-5 h-5 text-blue-500 fill-current group-hover:text-blue-600"
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 294.465 294.465"
             >
@@ -85,7 +85,7 @@ export default function PlantCard({ plant }) {
 			C219.232,186.465,214.832,181.665,209.232,181.265z"
               />
             </svg>
-            <p class="text-blue-400 group-hover:text-blue-800">
+            <p className="text-blue-400 group-hover:text-blue-800">
               {Math.max(
                 plant.watering_interval -
                   getDayDifference(new Date(plant.last_watered)),
@@ -94,8 +94,8 @@ export default function PlantCard({ plant }) {
               d
             </p>
           </button>
-          <div class="flex gap-x-1">
-            <button class="inline-block w-5 h-5 text-gray-500 fill-current hover:text-gray-700">
+          <div className="flex gap-x-1">
+            <button className="inline-block w-5 h-5 text-gray-500 fill-current hover:text-gray-700">
               <svg
                 viewBox="0 0 469.336 469.336"
                 xmlns="http://www.w3.org/2000/svg"
@@ -113,7 +113,12 @@ export default function PlantCard({ plant }) {
                 />
               </svg>
             </button>
-            <button class="inline-block w-5 h-5 text-red-400 fill-current hover:text-red-700">
+            <button
+              className="inline-block w-5 h-5 text-red-400 fill-current hover:text-red-700"
+              onClick={() => {
+                deleteCallback(plant.id);
+              }}
+            >
               <svg
                 viewBox="-40 0 427 427.00131"
                 xmlns="http://www.w3.org/2000/svg"
