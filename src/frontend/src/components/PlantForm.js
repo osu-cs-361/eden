@@ -25,7 +25,7 @@ export default function PlantForm({ type, plant, history }) {
     if (id !== -1) body.id = id;
 
     if (type === "new") {
-      const response = fetch("backend/new-plant", {
+      const response = fetch("eden_backend/new-plant", {
         method: "POST",
         body: JSON.stringify(body),
       });
@@ -33,7 +33,7 @@ export default function PlantForm({ type, plant, history }) {
         history.push("/app");
       }
     } else if (type === "edit") {
-      const response = fetch("backend/edit-plant", {
+      const response = fetch("eden_backend/edit-plant", {
         method: "PUT",
         body: JSON.stringify(body),
       });

@@ -4,3 +4,9 @@ services:
       MARIADB_ROOT_PASSWORD: ""
       MARIADB_ALLOW_EMPTY_ROOT_PASSWORD: "true"
       MARIADB_DATABASE: "test"
+  eden_backend:
+    command: ["npx", "nodemon", "--legacy-watch", "server.js"]
+    volumes:
+      - ../src/backend:/usr/src/eden-backend
+    ports:
+      - "3030:3030"

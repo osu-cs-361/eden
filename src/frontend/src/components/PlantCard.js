@@ -1,9 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-export default function PlantCard() {
+export default function PlantCard({ plant }) {
   return (
-    <div class="bg-gray-50 rounded shadow-lg">
+    <div class="bg-gray-50 rounded shadow-lg w-48">
       <Link to="/app/plant-info/:id">
         <img
           src="https://source.unsplash.com/random/200x150"
@@ -13,11 +13,11 @@ export default function PlantCard() {
       </Link>
       <div class="px-1 pb-0.5">
         <div class="pl-0.5">
-          <h1 class="block text-lg">
-            <Link to="/app/plant-info/:id">Species</Link>
+          <h1 class="block text-lg truncate">
+            <Link to="/app/plant-info/:id">{plant.species}</Link>
           </h1>
-          <h2 class="block text-md font-light italic">
-            <Link to="/app/plant-info/:id">Subtitle</Link>
+          <h2 class="block text-sm font-light italic truncate">
+            <Link to="/app/plant-info/:id">{plant.subtitle}</Link>
           </h2>
         </div>
 
@@ -42,7 +42,9 @@ export default function PlantCard() {
 			C219.232,186.465,214.832,181.665,209.232,181.265z"
               />
             </svg>
-            <p class="text-blue-400 group-hover:text-blue-800">7d</p>
+            <p class="text-blue-400 group-hover:text-blue-800">
+              {plant.watering_interval}d
+            </p>
           </button>
           <div class="flex gap-x-1">
             <button class="inline-block w-5 h-5 text-gray-500 fill-current hover:text-gray-700">

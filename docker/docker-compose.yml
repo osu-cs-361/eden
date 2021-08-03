@@ -8,3 +8,5 @@ services:
       - ../src/db/data:/var/lib/mysql
     labels:
       container_name: eden_db
+  eden_backend:
+    build: ../src/backend
