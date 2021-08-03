@@ -114,6 +114,18 @@ class db {
       throw e;
     }
   }
+
+  async editPlant(id, { species, subtitle, notes, watering_interval }) {
+    try {
+      return await this.pool.query(
+        "UPDATE Plant SET species=?, subtitle=?, notes=?, watering_interval=? WHERE id=?",
+        [species, subtitle, notes, watering_interval, id]
+      );
+    } catch (e) {
+      console.error("db.editPlant error: ", e);
+      throw e;
+    }
+  }
 }
 
 module.exports = db;

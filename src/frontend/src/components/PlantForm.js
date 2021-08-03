@@ -43,9 +43,12 @@ export default function PlantForm({ type, plant }) {
       }
     } else if (type === "edit") {
       const response = await fetch(
-        process.env.REACT_APP_BACKEND_URL + "/edit-plant/" + plant.id,
+        process.env.REACT_APP_BACKEND_URL + "/edit-plant/" + id,
         {
           method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
           body: JSON.stringify(body),
         }
       );
@@ -103,6 +106,9 @@ export default function PlantForm({ type, plant }) {
         value={type === "new" ? "Add Plant" : "Edit Plant"}
         className="self-center w-1/2 mt-2"
       />
+      {type === "new" && (
+        <h2 className="pt-2 text-xl text-center">Add plant by location</h2>
+      )}
     </form>
   );
 }

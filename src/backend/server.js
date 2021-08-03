@@ -41,6 +41,17 @@ app.get("/water-plant/:id", async (req, res) => {
   res.sendStatus(200);
 });
 
+app.put("/edit-plant/:id", async (req, res) => {
+  console.log(req.body);
+  await db.editPlant(req.params.id, {
+    species: req.body.species,
+    subtitle: req.body.subtitle,
+    notes: req.body.notes,
+    watering_interval: req.body.watering_interval,
+  });
+  res.sendStatus(200);
+});
+
 app.post("/new-plant", async (req, res) => {
   const response = await db.insert("Plant", {
     ...req.body,
