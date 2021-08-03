@@ -1,4 +1,4 @@
-const fetchPlantById = async (id) => {
+export const fetchPlantById = async (id) => {
   const response = await fetch(
     process.env.REACT_APP_BACKEND_URL + "/plant/" + id
   );
@@ -9,14 +9,14 @@ const fetchPlantById = async (id) => {
   }
 };
 
-const waterPlant = async (id) => {
+export const waterPlant = async (id) => {
   const response = await fetch(
     process.env.REACT_APP_BACKEND_URL + "/water-plant/" + id
   );
   return response.ok;
 };
 
-const deletePlant = async (id) => {
+export const deletePlant = async (id) => {
   const response = await fetch(
     process.env.REACT_APP_BACKEND_URL + "/delete-plant/" + id,
     {
@@ -25,5 +25,3 @@ const deletePlant = async (id) => {
   );
   return response.ok;
 };
-
-module.exports = { fetchPlantById, waterPlant, deletePlant };
