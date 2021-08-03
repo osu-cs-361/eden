@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import AppContainer from "../components/AppContainer";
 import PlantForm from "../components/PlantForm";
-import fetchPlantById from "../utilities/fetchPlantById";
+import { fetchPlantById } from "../utilities/plantUtilities";
 
 export default function EditPlant({ match }) {
   const [plant, setPlant] = useState({});

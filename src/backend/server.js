@@ -36,6 +36,11 @@ app.get("/plant/:id", async (req, res) => {
   res.status(200).send(plant);
 });
 
+app.get("/water-plant/:id", async (req, res) => {
+  await db.waterPlant(req.params.id);
+  res.sendStatus(200);
+});
+
 app.post("/new-plant", async (req, res) => {
   const response = await db.insert("Plant", {
     ...req.body,

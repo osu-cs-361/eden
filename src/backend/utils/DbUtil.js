@@ -98,6 +98,22 @@ class db {
       throw e;
     }
   }
+
+  async waterPlant(id) {
+    try {
+      const waterDateTime = new Date(Date.now())
+        .toISOString()
+        .replace("T", " ")
+        .replace("Z", "");
+      return await this.pool.query(
+        "UPDATE Plant SET last_watered=? WHERE id=?",
+        [waterDateTime, id]
+      );
+    } catch (e) {
+      console.error("db.waterPlant error: ", e);
+      throw e;
+    }
+  }
 }
 
 module.exports = db;

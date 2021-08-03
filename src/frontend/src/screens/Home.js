@@ -4,7 +4,7 @@ import AppContainer from "../components/AppContainer";
 import NoPlants from "../components/NoPlants";
 import PlantCard from "../components/PlantCard";
 import CardContainer from "../components/CardContainer";
-import deletePlant from "../utilities/deletePlant";
+import { deletePlant, waterPlant } from "../utilities/plantUtilities";
 
 export default function Home() {
   const [plants, setPlants] = useState([]);
@@ -12,6 +12,18 @@ export default function Home() {
   const deleteCallback = async (id) => {
     if (await deletePlant(id)) {
       setPlants(plants.filter((plant) => plant.id !== id));
+    }
+  };
+
+  const waterCallback = async (id) => {
+    if (await waterPlant(id)) {
+      setPlants(
+        plants.map((plant) => {
+          if (plant.id === id) {
+            return { ...plant, last_watered: Date.now() };
+          } else return plant;
+        })
+      );
     }
   };
 
@@ -46,6 +58,7 @@ export default function Home() {
                 <PlantCard
                   plant={plant}
                   deleteCallback={deleteCallback}
+                  waterCallback={waterCallback}
                   key={plant.id}
                 />
               );
