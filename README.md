@@ -3,7 +3,7 @@ Eden is a plant care app that shows you a dashboard of your plants, giving you s
 
 ## Build and Run Eden
 
-The simplest way to build and run CourseSignal is with Docker.
+The simplest way to build and run Eden is with Docker.
 
 To run CourseSignal in development mode, open a terminal in the docker directory and run
 
