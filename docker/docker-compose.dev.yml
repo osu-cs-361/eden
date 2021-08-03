@@ -8,5 +8,7 @@ services:
     command: ["npx", "nodemon", "--legacy-watch", "server.js"]
     volumes:
       - ../src/backend:/usr/src/eden-backend
-    ports:
-      - "3030:3030"
+    environment:
+      MARIADB_USER: "root"
+      MARIADB_PASSWORD: ""
+      MARIADB_DATABASE: "test"

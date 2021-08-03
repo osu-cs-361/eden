@@ -3,6 +3,8 @@ services:
     build: ../src/db
     environment:
       MARIADB_ROOT_PASSWORD: "${EDEN_DB_PASSWORD}"
+      MARIADB_USER: "${EDEN_DB_USER}"
+      MARIADB_PASSWORD: "${EDEN_DB_PASSWORD}"
       MARIADB_DATABASE: "eden"
     volumes:
       - ../src/db/data:/var/lib/mysql
@@ -10,3 +12,16 @@ services:
       container_name: eden_db
   eden_backend:
     build: ../src/backend
+    environment:
+      NODE_ENV: production
+      MARIADB_USER: "${EDEN_DB_USER}"
+      MARIADB_PASSWORD: "${EDEN_DB_PASSWORD}"
+      MARIADB_DATABASE: "eden"
+    ports:
+      - "3030:3030"
+  eden_frontend:
+    build: ../src/frontend
+    environment:
+      REACT_APP_BACKEND_URL: "${EDEN_BACKEND_URL}"
+    ports:
+      - "80:80"
