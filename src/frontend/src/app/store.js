@@ -18,6 +18,8 @@ const authenticationSlice = createSlice({
   },
 });
 
+export const { authenticate, deauthenticate } = authenticationSlice.actions;
+
 export const store = configureStore({
   reducer: {
     authentication: authenticationSlice.reducer,

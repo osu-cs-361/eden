@@ -14,9 +14,7 @@ function App() {
         <Route path="/" exact component={Splash} />
         <Route path="/signup" component={Signup} />
         <Route path="/login" component={Login} />
-        <Route path="/app" exact component={Home} />
-        <Route path="/app/add-plant" component={AddPlant} />
-        <Route path="/app/edit-plant/:id" component={EditPlant} />
+        <Route path="/logout" component={Logout} />
       </Switch>
     </>
   );
