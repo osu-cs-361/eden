@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { waterPlant } from "../utilities/plantUtilities";
 
 export default function PlantCard({ plant, waterCallback, deleteCallback }) {
   const getDayDifference = (date) => {

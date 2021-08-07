@@ -12,13 +12,13 @@ export default function Home() {
   const token = useSelector((state) => state.authentication.token);
 
   const deleteCallback = async (id) => {
-    if (await deletePlant(id)) {
+    if (await deletePlant(id, token)) {
       setPlants(plants.filter((plant) => plant.id !== id));
     }
   };
 
   const waterCallback = async (id) => {
-    if (await waterPlant(id)) {
+    if (await waterPlant(id, token)) {
       setPlants(
         plants.map((plant) => {
           if (plant.id === id) {
