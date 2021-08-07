@@ -5,6 +5,8 @@ import Login from "./screens/Login";
 import Home from "./screens/Home";
 import AddPlant from "./screens/AddPlant";
 import EditPlant from "./screens/EditPlant";
+import Logout from "./components/Logout";
+
 import { Route, Switch } from "react-router-dom";
 
 function App() {
