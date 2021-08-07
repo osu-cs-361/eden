@@ -19,6 +19,8 @@ services:
       MARIADB_DATABASE: "eden"
     ports:
       - "3030:3030"
+    labels:
+      container_name: eden_backend
   eden_frontend:
     build: ../src/frontend
     environment:
