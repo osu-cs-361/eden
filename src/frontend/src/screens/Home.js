@@ -5,9 +5,11 @@ import NoPlants from "../components/NoPlants";
 import PlantCard from "../components/PlantCard";
 import CardContainer from "../components/CardContainer";
 import { deletePlant, waterPlant } from "../utilities/plantUtilities";
+import { useSelector } from "react-redux";
 
 export default function Home() {
   const [plants, setPlants] = useState([]);
+  const token = useSelector((state) => state.authentication.token);
 
   const deleteCallback = async (id) => {
     if (await deletePlant(id)) {
@@ -31,14 +33,14 @@ export default function Home() {
     const fetchPlants = async (setPlants) => {
       try {
         const response = await fetch(
-          process.env.REACT_APP_BACKEND_URL + "/plants"
+          process.env.REACT_APP_BACKEND_URL + "/plants",
+          { method: "GET", headers: { Authorization: token } }
         );
         if (response.ok) {
           const body = await response.json();
-          // const body = await response.text();
           setPlants(body);
         } else {
-          throw new Error("HTTP error ", response.status);
+          throw new Error("HTTP error " + response.status);
         }
       } catch (e) {
         console.error("fetchPlants error: ", e.message);

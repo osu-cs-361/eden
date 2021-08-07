@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 export default function PlantForm({ type, plant }) {
   const [id, setId] = useState(plant?.id ?? -1);
@@ -14,6 +15,7 @@ export default function PlantForm({ type, plant }) {
   );
 
   const history = useHistory();
+  const token = useSelector((state) => state.authentication.token);
 
   const submitPlantForm = async (e) => {
     e.preventDefault();
@@ -34,6 +36,7 @@ export default function PlantForm({ type, plant }) {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
+            Authorization: token,
           },
           body: JSON.stringify(body),
         }
@@ -48,6 +51,7 @@ export default function PlantForm({ type, plant }) {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
+            Authorization: token,
           },
           body: JSON.stringify(body),
         }
