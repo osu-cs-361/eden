@@ -1,10 +1,11 @@
 import { createSlice, configureStore } from "@reduxjs/toolkit";
+import { authCookieExists, getAuthCookie } from "../utilities/authUtilities";
 
 const authenticationSlice = createSlice({
   name: "authentication",
   initialState: {
-    value: false,
-    token: "",
+    value: authCookieExists(),
+    token: getAuthCookie(),
   },
   reducers: {
     authenticate: (state, action) => {

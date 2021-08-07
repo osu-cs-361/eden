@@ -8,6 +8,7 @@ import EditPlant from "./screens/EditPlant";
 import Logout from "./components/Logout";
 
 import { Route, Switch } from "react-router-dom";
+import PrivateRoute from "./utilities/PrivateRoute";
 
 function App() {
   return (
@@ -17,6 +18,9 @@ function App() {
         <Route path="/signup" component={Signup} />
         <Route path="/login" component={Login} />
         <Route path="/logout" component={Logout} />
+        <PrivateRoute path="/app" exact component={Home} />
+        <PrivateRoute path="/app/add-plant" component={AddPlant} />
+        <PrivateRoute path="/app/edit-plant/:id" component={EditPlant} />
       </Switch>
     </>
   );

@@ -1,19 +1,41 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link, useHistory } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { authenticate } from "../app/store.js";
+import { setAuthCookie } from "../utilities/authUtilities.js";
 
 export default function Login() {
+  const authenticated = useSelector((state) => state.authentication.value);
+  const dispatch = useDispatch();
+  const history = useHistory();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  useEffect(() => {
+    if (authenticated) {
+      history.push("/app");
+    }
+  }, []);
 
   const submitLogin = async (e) => {
     e.preventDefault();
 
-    const response = await fetch("backend/api/v1/login", {
+    const response = await fetch(process.env.REACT_APP_BACKEND_URL + "/login", {
       method: "POST",
-      body: { email, password },
+      body: JSON.stringify({ email, password }),
+      headers: {
+        "Content-Type": "application/json",
+      },
     });
 
-    console.log(response.status);
+    if (response.ok) {
+      const data = await response.json();
+      if (data.token) {
+        setAuthCookie(data.token);
+        dispatch(authenticate(data.token));
+        history.push("/app");
+      }
+    }
   };
 
   return (

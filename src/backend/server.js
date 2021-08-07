@@ -21,7 +21,9 @@ app.use(noCors);
 app.use(express.json());
 
 const EdenServiceRouter = require("./routes/EdenServiceRouter");
+const AuthenticationRouter = require("./routes/AuthenticationRouter");
 app.use("/api/v1/", EdenServiceRouter(db));
+app.use("/api/v1/", AuthenticationRouter(db));
 
 app.get("/api/v1/healthcheck", (req, res) => res.sendStatus(200));
 
