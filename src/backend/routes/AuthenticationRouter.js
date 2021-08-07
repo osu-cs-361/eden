@@ -1,4 +1,8 @@
 const express = require("express");
+const bcrypt = require("bcrypt");
+const saltRounds = 10;
+const jwt = require("jsonwebtoken");
+const secret = process.env.EDEN_BACKEND_SECRET || "topsecret";
 
 const AuthenticationRouter = (db) => {
   const router = express.Router();
@@ -9,13 +13,31 @@ const AuthenticationRouter = (db) => {
       filterParams: [req.body.email],
     });
 
-    if (user.password === req.body.password) {
-      res.status(200).send({ token: user.token });
-    }
+    const passwordCorrect = bcrypt.compareSync(
+      req.body.password,
+      user.password
+    );
 
+    if (passwordCorrect) {
+      res.status(200).send({ token: user.token });
+    } else {
+      res.sendStatus(401);
+    }
   });
 
-  // TODO: Sign up
+  router.post("/signup", async (req, res) => {
+    const user = { email: req.body.email };
+    user.password = bcrypt.hashSync(req.body.password, saltRounds);
+    user.token = jwt.sign(user.email, secret);
+
+    const response = await db.insert("User", user);
+
+    if (response.affectedRows === 1) {
+      res.status(200).send({ token: user.token });
+    } else {
+      res.sendStatus(400);
+    }
+  });
 
   return router;
 };

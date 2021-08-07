@@ -1,27 +1,52 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { authenticate } from "../app/store";
+import { setAuthCookie } from "../utilities/authUtilities";
 
 export default function Signup() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const dispatch = useDispatch();
+  const history = useHistory();
+
+  const checkPasswords = (password1, password2, errorCallback) => {
+    if (password1 === password2) {
+      if (password1.length < 8) {
+        errorCallback("Password must be at least 8 characters.");
+        return false;
+      } else {
+        errorCallback("");
+        return true;
+      }
+    } else {
+      errorCallback("Password and confirmation password must match.");
+      return false;
+    }
+  };
 
   const submitSignup = async (e) => {
     e.preventDefault();
-    if (password === confirmPassword) {
-      if (password.length < 8) {
-        setErrorMessage("Password must be at least 8 characters.");
-      } else {
-        setErrorMessage("");
-        const response = await fetch("backend/api/v1/signup", {
+    if (checkPasswords(password, confirmPassword, setErrorMessage)) {
+      const response = await fetch(
+        process.env.REACT_APP_BACKEND_URL + "/signup",
+        {
           method: "POST",
-          body: { email, password },
-        });
-        console.log(response.status);
+          body: JSON.stringify({ email, password }),
+          headers: { "Content-Type": "application/json" },
+        }
+      );
+
+      if (response.ok) {
+        const data = await response.json();
+        if (data.token) {
+          setAuthCookie(data.token);
+          dispatch(authenticate(data.token));
+          history.push("/app");
+        }
       }
-    } else {
-      setErrorMessage("Password and confirmation password must match.");
     }
   };
 
