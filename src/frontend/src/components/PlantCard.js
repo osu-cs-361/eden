@@ -52,7 +52,7 @@ export default function PlantCard({ plant, waterCallback, deleteCallback }) {
 
         {/* Plant Image */}
         <img
-          src={"https://source.unsplash.com/random/200x150?id=" + plant.id}
+          src={"https://source.unsplash.com/200x150?plant&id=" + plant.id}
           alt=""
           className="w-48 rounded-t h-36"
         />
