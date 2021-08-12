@@ -51,7 +51,12 @@ export default function Home() {
 
   return (
     <>
-      <Navbar navLinks={[{ ref: "/app/add-plant", text: "Add Plant" }]} />
+      <Navbar
+        navLinks={[
+          { ref: "/app/add-plant", text: "Add Plant" },
+          { ref: "/app/local-map", text: "Local Map" },
+        ]}
+      />
       <AppContainer>
         {plants.length ? (
           <CardContainer>
