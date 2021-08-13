@@ -30,7 +30,7 @@ export default function Signup() {
   const submitSignup = async (e) => {
     e.preventDefault();
     if (checkPasswords(password, confirmPassword, setErrorMessage)) {
-      const token = sendUserData("/signup", { email, password });
+      const token = await sendUserData("/signup", { email, password });
       if (token) {
         setAuthCookie(token);
         dispatch(authenticate(token));
