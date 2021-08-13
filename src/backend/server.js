@@ -2,15 +2,22 @@ const express = require("express");
 const dbUtil = require("./utils/DbUtil");
 
 const app = express();
-app.set("port", 3030);
+
+const APP_PORT = process.argv[2] || 4004;
+const DB_HOST = process.env.EDEN_DB_HOST || "db";
+const TARGET_DB = process.env.EDEN_TARGET_DB || "test";
+const DB_PASSWORD = process.env.EDEN_DB_PASSWORD || "";
+const DB_USER = process.env.EDEN_DB_USER || "root";
 
 const db = new dbUtil({
-  host: "eden_db",
-  user: "root",
-  database: "test",
+  host: DB_HOST,
+  user: DB_USER,
+  password: DB_PASSWORD,
+  database: TARGET_DB,
   connectionLimit: 5,
 });
 
+app.set("port", APP_PORT);
 app.use(express.json());
 
 const noCors = (req, res, next) => {
