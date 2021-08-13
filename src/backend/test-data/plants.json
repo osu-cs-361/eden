@@ -1,0 +1,26 @@
+[
+  {
+    "species": "Bromeliad",
+    "subtitle": "Monocot flowering plant",
+    "notes": "Kitchen windowsill",
+    "watering_interval": 4
+  },
+  {
+    "species": "Snake Plant",
+    "subtitle": "Tall, rigid sword-shaped leaves",
+    "notes": "Fireplace mantle",
+    "watering_interval": 7
+  },
+  {
+    "species": "Chrysanthemum",
+    "subtitle": "Bright, cheerful bloom",
+    "notes": "Living room window",
+    "watering_interval": 6
+  },
+  {
+    "species": "Ficus",
+    "subtitle": "Woody shrub",
+    "notes": "Office",
+    "watering_interval": 5
+  }
+]

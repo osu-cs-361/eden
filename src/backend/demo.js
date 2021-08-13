@@ -1,12 +1,8 @@
 const fetch = require("node-fetch");
+const fs = require("fs");
 
-const populateTestData = async () => {
-  const users = [
-    { email: "test3@test.email", password: "password321" },
-    { email: "test4@test.email", password: "secretphrase" },
-  ];
+const writeUsers = async (users) => {
   const tokens = [];
-
   for (let user of users) {
     console.log(`Writing user ${user.email}`);
     const response = await fetch("http://localhost:3030/api/v1/signup", {
@@ -19,53 +15,35 @@ const populateTestData = async () => {
       tokens.push(data.token);
     }
   }
+  return tokens;
+};
 
-  const plants = [
-    {
-      species: "Bromeliad",
-      subtitle: "Monocot flowering plant",
-      notes: "Kitchen windowsill",
-      watering_interval: 4,
-      last_watered: Date.now(),
-      meta: { token: tokens[0] },
-    },
-    {
-      species: "Snake Plant",
-      subtitle: "Tall, rigid sword-shaped leaves",
-      notes: "Fireplace mantle",
-      watering_interval: 7,
-      last_watered: Date.now(),
-      meta: { token: tokens[0] },
-    },
-    {
-      species: "Chrysanthemum",
-      subtitle: "Bright, cheerful bloom",
-      notes: "Living room window",
-      watering_interval: 6,
-      last_watered: Date.now(),
-      meta: { token: tokens[1] },
-    },
-    {
-      species: "Ficus",
-      subtitle: "Woody shrub",
-      notes: "Office",
-      watering_interval: 5,
-      last_watered: Date.now(),
-      meta: { token: tokens[1] },
-    },
-  ];
+writePlants = async (plants, tokens) => {
+  for (let i = 0; i < plants.length; i++) {
+    const token = tokens[i % tokens.length];
+    const plant = plants[i];
 
-  for (let plant of plants) {
+    plant.last_watered = Date.now();
     console.log(`Writing plant ${plant.species}`);
-    fetch("http://localhost:3030/api/v1/new-plant", {
+
+    await fetch("http://localhost:3030/api/v1/new-plant", {
       method: "POST",
       body: JSON.stringify(plant),
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${plant.meta.token}`,
+        Authorization: `Bearer ${token}`,
       },
     });
   }
+};
+
+const populateTestData = async () => {
+  const users = JSON.parse(fs.readFileSync("./test-data/users.json"));
+  const plants = JSON.parse(fs.readFileSync("./test-data/plants.json"));
+  console.log(users);
+  console.log(plants);
+  // const tokens = writeUsers(users);
+  // await writePlants(plants, tokens);
 };
 
 populateTestData();
