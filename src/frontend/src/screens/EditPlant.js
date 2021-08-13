@@ -20,7 +20,7 @@ export default function EditPlant({ match }) {
   return (
     <>
       <Navbar navLinks={[{ ref: "/app", text: "Home" }]} />
-      <AppContainer>
+      <AppContainer hideAddPlantButton>
         {plant.id && <PlantForm type="edit" plant={plant} />}
       </AppContainer>
     </>

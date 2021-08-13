@@ -25,7 +25,7 @@ export default function LocalMap() {
   return (
     <>
       <Navbar navLinks={[{ ref: "/app", text: "Home" }]} />
-      <AppContainer>
+      <AppContainer hideAddPlantButton>
         <div>
           <iframe
             title="map"
