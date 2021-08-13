@@ -16,7 +16,7 @@ export default function PlantInfo({ location, match }) {
         <div class="w-5/6 grid grid-cols-3 gap-2 p-4 mt-6 mb-12">
           <h1 className="col-span-3 text-3xl text-gray-700">Your Plant</h1>
           <img
-            src={"https://source.unsplash.com/200x150?plant&id=" + plant.id}
+            src={"https://source.unsplash.com/200x150?plant," + plant.id}
             className="w-48 col-span-1 rounded"
             alt={plant.species}
           />
