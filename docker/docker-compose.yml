@@ -18,7 +18,7 @@ services:
       MARIADB_PASSWORD: "${EDEN_DB_PASSWORD}"
       MARIADB_DATABASE: "eden"
     ports:
-      - "3030:3030"
+      - "4004:4004"
     labels:
       container_name: eden_backend
   eden_frontend:

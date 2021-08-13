@@ -4,7 +4,7 @@ const dbUtil = require("./utils/DbUtil");
 const app = express();
 
 const APP_PORT = process.argv[2] || 4004;
-const DB_HOST = process.env.EDEN_DB_HOST || "db";
+const DB_HOST = process.env.EDEN_DB_HOST || "eden_db";
 const TARGET_DB = process.env.EDEN_TARGET_DB || "test";
 const DB_PASSWORD = process.env.EDEN_DB_PASSWORD || "";
 const DB_USER = process.env.EDEN_DB_USER || "root";
