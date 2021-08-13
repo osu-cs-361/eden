@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
+import Modal from "react-modal";
 import { Link } from "react-router-dom";
 
 export default function PlantCard({ plant, waterCallback, deleteCallback }) {
+  const [deleteModalOpen, setDeleteModalOpen] = useState(false);
+
   const getDayDifference = (date) => {
     let delta = new Date(Date.now()) - date;
     return Math.floor(delta / (1000 * 60 * 60 * 24));
@@ -9,6 +12,33 @@ export default function PlantCard({ plant, waterCallback, deleteCallback }) {
 
   return (
     <div className="relative w-48 rounded shadow-lg bg-gray-50">
+      <Modal
+        isOpen={deleteModalOpen}
+        onRequestClose={() => setDeleteModalOpen(false)}
+        appElement={document.getElementById("root")}
+        className="absolute flex flex-col items-center justify-center gap-2 bg-white border border-gray-900 inset-1/3"
+      >
+        <p className="text-lg text-center">
+          Are you sure you want to delete {plant.species}?
+        </p>
+        <div class="flex gap-2">
+          <button
+            onClick={() => {
+              setDeleteModalOpen(false);
+              deleteCallback(plant.id);
+            }}
+            className="p-2 text-white bg-red-500 border border-red-500 rounded hover:bg-red-600"
+          >
+            Delete
+          </button>
+          <button
+            onClick={() => setDeleteModalOpen(false)}
+            className="p-2 text-gray-400 border border-gray-400 rounded hover:bg-gray-200"
+          >
+            Cancel
+          </button>
+        </div>
+      </Modal>
       <Link
         className="group"
         to={{ pathname: "/app/plants/" + plant.id, state: { plant } }}
@@ -143,7 +173,7 @@ export default function PlantCard({ plant, waterCallback, deleteCallback }) {
             <button
               className="inline-block w-5 h-5 text-red-400 fill-current hover:text-red-700"
               onClick={() => {
-                deleteCallback(plant.id);
+                setDeleteModalOpen(true);
               }}
             >
               <svg
