@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { authenticate } from "../app/store";
-import { setAuthCookie } from "../utilities/authUtilities";
+import { setAuthCookie, sendUserData } from "../utilities/authUtilities";
 
 export default function Signup() {
   const [email, setEmail] = useState("");
@@ -30,22 +30,11 @@ export default function Signup() {
   const submitSignup = async (e) => {
     e.preventDefault();
     if (checkPasswords(password, confirmPassword, setErrorMessage)) {
-      const response = await fetch(
-        process.env.REACT_APP_BACKEND_URL + "/signup",
-        {
-          method: "POST",
-          body: JSON.stringify({ email, password }),
-          headers: { "Content-Type": "application/json" },
-        }
-      );
-
-      if (response.ok) {
-        const data = await response.json();
-        if (data.token) {
-          setAuthCookie(data.token);
-          dispatch(authenticate(data.token));
-          history.push("/app");
-        }
+      const token = sendUserData("/signup", { email, password });
+      if (token) {
+        setAuthCookie(token);
+        dispatch(authenticate(token));
+        history.push("/app");
       }
     }
   };

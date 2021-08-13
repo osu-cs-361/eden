@@ -14,6 +14,25 @@ export const deleteAuthCookie = () => {
   setCookie("eden_authorization", "", -1);
 };
 
+export const sendUserData = async (endpoint, { email, password }) => {
+  const response = await fetch(process.env.REACT_APP_BACKEND_URL + endpoint, {
+    method: "POST",
+    body: JSON.stringify({ email, password }),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+
+  if (response.ok) {
+    const data = await response.json();
+    if (data.token) {
+      return data.token;
+    } else {
+      return null;
+    }
+  }
+};
+
 const setCookie = (cname, cvalue, exdays) => {
   const d = new Date();
   d.setTime(d.getTime() + exdays * 24 * 60 * 60 * 1000);
