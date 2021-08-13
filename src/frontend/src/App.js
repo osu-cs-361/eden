@@ -6,6 +6,8 @@ import Home from "./screens/Home";
 import AddPlant from "./screens/AddPlant";
 import EditPlant from "./screens/EditPlant";
 import LocalMap from "./screens/LocalMap";
+import PlantInfo from "./screens/PlantInfo";
+
 import Logout from "./components/Logout";
 
 import { Route, Switch } from "react-router-dom";
@@ -20,6 +22,7 @@ function App() {
         <Route path="/login" component={Login} />
         <Route path="/logout" component={Logout} />
         <PrivateRoute path="/app" exact component={Home} />
+        <PrivateRoute path="/app/plants/:id" component={PlantInfo} />
         <PrivateRoute path="/app/add-plant" component={AddPlant} />
         <PrivateRoute path="/app/edit-plant/:id" component={EditPlant} />
         <PrivateRoute path="/app/local-map" component={LocalMap} />

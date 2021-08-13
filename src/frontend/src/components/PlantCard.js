@@ -9,7 +9,10 @@ export default function PlantCard({ plant, waterCallback, deleteCallback }) {
 
   return (
     <div className="relative w-48 rounded shadow-lg bg-gray-50">
-      <Link className="group">
+      <Link
+        className="group"
+        to={{ pathname: "/app/plants/" + plant.id, state: { plant } }}
+      >
         {/* Watering Interval Pill */}
         <div className="absolute flex items-center justify-around px-2 py-1 text-xs text-center bg-green-900 rounded-full opacity-50 group-hover:opacity-100 text-gray-50 gap-x-1 top-2 right-2">
           <svg
@@ -62,10 +65,18 @@ export default function PlantCard({ plant, waterCallback, deleteCallback }) {
         {/* Plant Title/Subtitle */}
         <div className="pl-0.5">
           <h1 className="block text-lg truncate">
-            <Link>{plant.species}</Link>
+            <Link
+              to={{ pathname: "/app/plants/" + plant.id, state: { plant } }}
+            >
+              {plant.species}
+            </Link>
           </h1>
           <h2 className="block text-sm italic font-light truncate">
-            <Link>{plant.subtitle}</Link>
+            <Link
+              to={{ pathname: "/app/plants/" + plant.id, state: { plant } }}
+            >
+              {plant.subtitle}
+            </Link>
           </h2>
         </div>
 
