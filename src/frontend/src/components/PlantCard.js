@@ -44,7 +44,10 @@ export default function PlantCard({ plant, waterCallback, deleteCallback }) {
         to={{ pathname: "/app/plants/" + plant.id, state: { plant } }}
       >
         {/* Watering Interval Pill */}
-        <div className="absolute flex items-center justify-around px-2 py-1 text-xs text-center bg-green-900 rounded-full opacity-50 group-hover:opacity-100 text-gray-50 gap-x-1 top-2 right-2">
+        <div
+          className="absolute flex items-center justify-around px-2 py-1 text-xs text-center bg-green-900 rounded-full opacity-50 group-hover:opacity-100 text-gray-50 gap-x-1 top-2 right-2"
+          title={`Water ${plant.species} every ${plant.watering_interval} days`}
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 512 512"
@@ -115,6 +118,7 @@ export default function PlantCard({ plant, waterCallback, deleteCallback }) {
           <button
             className="flex group gap-x-0.5"
             onClick={() => waterCallback(plant.id)}
+            title="Water plant (resets watering timer)"
           >
             <svg
               className="inline-block w-5 h-5 text-blue-500 fill-current group-hover:text-blue-600"
@@ -150,6 +154,7 @@ export default function PlantCard({ plant, waterCallback, deleteCallback }) {
             <Link
               to={"/app/edit-plant/" + plant.id}
               className="inline-block w-5 h-5 text-gray-500 fill-current hover:text-gray-700"
+              title="Edit Plant Info"
             >
               <svg
                 viewBox="0 0 469.336 469.336"
@@ -175,6 +180,7 @@ export default function PlantCard({ plant, waterCallback, deleteCallback }) {
               onClick={() => {
                 setDeleteModalOpen(true);
               }}
+              title="Delete Plant"
             >
               <svg
                 viewBox="-40 0 427 427.00131"
